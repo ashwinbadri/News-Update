@@ -7,6 +7,9 @@ from typing import Any, Dict, List
 import requests
 from dotenv import load_dotenv
 from openai import OpenAI
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 
 load_dotenv()
@@ -25,6 +28,25 @@ client = OpenAI(api_key=OPENAI_API_KEY)
 
 NEWSAPI_URL = "https://newsapi.org/v2/everything"
 
+
+def send_email_report(subject: str, body: str) -> None:
+    sender = os.getenv("EMAIL_SENDER")
+    password = os.getenv("EMAIL_APP_PASSWORD")
+    receiver = os.getenv("EMAIL_RECEIVER")
+
+    if not sender or not password or not receiver:
+        raise ValueError("Missing email config in .env")
+
+    message = MIMEMultipart()
+    message["From"] = sender
+    message["To"] = receiver
+    message["Subject"] = subject
+
+    message.attach(MIMEText(body, "plain"))
+
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+        server.login(sender, password)
+        server.send_message(message)
 
 def load_portfolio(path: str = "portfolio.json") -> List[Dict[str, str]]:
     with open(path, "r", encoding="utf-8") as f:
@@ -190,9 +212,11 @@ def main() -> None:
     report = build_report(stocks)
     path = save_report(report)
 
+    subject = f"Daily Stock News Report - {datetime.now().strftime('%Y-%m-%d')}"
+    send_email_report(subject, report)
+
     print(f"Saved report to: {path}")
-    print()
-    print(report)
+    print("Email sent successfully.")
 
 
 if __name__ == "__main__":
