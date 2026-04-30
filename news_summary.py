@@ -34,8 +34,12 @@ def send_email_report(subject: str, body: str) -> None:
     password = os.getenv("EMAIL_APP_PASSWORD")
     receiver = os.getenv("EMAIL_RECEIVER")
 
+    # Debug logs (safe, don't print password)
+    print("EMAIL_SENDER:", sender)
+    print("EMAIL_RECEIVER:", receiver)
+
     if not sender or not password or not receiver:
-        raise ValueError("Missing email config in .env")
+        raise ValueError("Missing email config (check env variables)")
 
     message = MIMEMultipart()
     message["From"] = sender
@@ -44,9 +48,14 @@ def send_email_report(subject: str, body: str) -> None:
 
     message.attach(MIMEText(body, "plain"))
 
-    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
-        server.login(sender, password)
-        server.send_message(message)
+    try:
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+            server.login(sender, password)
+            server.send_message(message)
+        print("✅ Email sent successfully")
+    except Exception as e:
+        print("❌ Email failed:", str(e))
+        raise
 
 def load_portfolio(path: str = "portfolio.json") -> List[Dict[str, str]]:
     with open(path, "r", encoding="utf-8") as f:
