@@ -2,6 +2,30 @@
   "stocks": [
     { "ticker": "AAPL", "company": "Apple" },
     { "ticker": "MSFT", "company": "Microsoft" },
-    { "ticker": "NVDA", "company": "NVIDIA" }
+    { "ticker": "NVDA", "company": "NVIDIA" },
+    { "ticker": "GOOGL", "company": "Alphabet" },
+    { "ticker": "AMZN", "company": "Amazon" },
+    { "ticker": "META", "company": "Meta" },
+    { "ticker": "TSM", "company": "Taiwan Semi Conductor" },
+    { "ticker": "TSLA", "company": "Tesla" },
+    { "ticker": "AMD", "company": "AMD" },
+    { "ticker": "UBER", "company": "Uber" },
+    { "ticker": "CRWD", "company": "Crowd Stroke Holdings" },
+    { "ticker": "V", "company": "Visa" },
+    { "ticker": "CRM", "company": "Salesforce" },
+    { "ticker": "BROS", "company": "Dutch Bros" },
+    { "ticker": "TCEHY", "company": "Tencent" },
+    { "ticker": "HOOD", "company": "RobinHood" },
+    { "ticker": "PLD", "company": "Prologis" },
+    { "ticker": "BABA", "company": "Alibaba" },
+    { "ticker": "COST", "company": "COSTCO" },
+    { "ticker": "VICI", "company": "VICI Properties" },
+    { "ticker": "NFLX", "company": "Netflix" },
+    { "ticker": "AVGO", "company": "Brodcom" },
+    { "ticker": "AMD", "company": "AMD" },
+    { "ticker": "RIVN", "company": "Rivian" },
+    { "ticker": "INFY", "company": "Infosys" },
+    { "ticker": "TEM", "company": "Tempus AI" },
+    { "ticker": "LCID", "company": "Lucid" }
   ]
 }   
